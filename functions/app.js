@@ -6,11 +6,10 @@ import { createUserRouter } from '../src/routes/userRoutes.js';
 import cookieParser from 'cookie-parser';
 import jwt from 'jsonwebtoken';
 import serverless from 'serverless-http'
+import { MovieModel } from './src/models/moviesModel.js';
+import { UserModel } from './src/models/userModel.js';
 
-export const createApp = ({movieModel, userModel})=>{
-
-   
-    const app = express();
+const app = express();
     app.use(express.json({ limit: '10mb' }));
     app.use(cookieParser())
     app.use(cors({
@@ -29,10 +28,6 @@ export const createApp = ({movieModel, userModel})=>{
     })
     app.use('/api/movies', createMovieRouter({movieModel}));
     app.use('/api/user', createUserRouter({userModel}))
-    // app.listen(PORT, ()=>{
-    //     console.log(`servidor escuchando en el puerto ${PORT}...`);
-    // })
-    const handler = serverless(app)
-    return handler
+   
+   export const handler = serverless(app)
 
-}

@@ -32,6 +32,7 @@ export const createApp = ({movieModel, userModel})=>{
     // app.listen(PORT, ()=>{
     //     console.log(`servidor escuchando en el puerto ${PORT}...`);
     // })
-    return serverless(app)
+    const handler = serverless(app)
+    return handler
 
 }
